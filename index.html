@@ -7,17 +7,13 @@
     <script type="module" crossorigin src="./assets/index-Q91DHHC7.js"></script>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-      /* 1. 强制所有容器高度占满屏幕，禁止滚动出现 */
+      /* 1. 基础全屏锁定 */
       html, body, #root {
-        height: 100%;
-        width: 100%;
-        margin: 0;
-        padding: 0;
-        overflow: hidden;
-        background-color: #f8fafc;
+        height: 100%; width: 100%; margin: 0; padding: 0;
+        overflow: hidden; background-color: #f8fafc;
       }
 
-      /* 2. 强力拉伸内部 Div */
+      /* 2. 强制内容拉伸 */
       #root > div {
         height: 100vh !important;
         display: flex !important;
@@ -26,39 +22,55 @@
         box-sizing: border-box !important;
       }
 
-      /* 3. 让顶部的蓝色汇总大卡片占 40% 的高度 */
+      /* 3. 顶部蓝色大卡片保持原样 */
       #root > div > div:first-child {
-        flex: 0 0 40% !important;
+        flex: 0 0 38% !important;
         display: flex !important;
         flex-direction: column !important;
         justify-content: center !important;
         margin-bottom: 16px !important;
       }
 
-      /* 4. 让剩下的四个方块所在的区域占满剩下的 60% */
+      /* 4. 下方四个方块区域铺满剩下的空间 */
       #root > div > div:nth-child(2) {
         flex: 1 !important;
         display: grid !important;
         grid-template-columns: repeat(2, 1fr) !important;
         grid-template-rows: repeat(2, 1fr) !important;
         gap: 12px !important;
-        height: 100% !important;
       }
 
-      /* 5. 关键：强制让这四个方块内部垂直居中并拉长 */
+      /* 5. 为四个方块分别上色 (强制覆盖默认白色) */
+      /* 左上：总班次 (浅蓝色) */
+      #root > div > div:nth-child(2) > div:nth-child(1) {
+        background-color: #e0f2fe !important; /* sky-100 */
+        border: 1px solid #bae6fd !important;
+      }
+      /* 右上：驻站次 (浅绿色) */
+      #root > div > div:nth-child(2) > div:nth-child(2) {
+        background-color: #dcfce7 !important; /* green-100 */
+        border: 1px solid #bbf7d0 !important;
+      }
+      /* 左下：法定班 (浅红色) */
+      #root > div > div:nth-child(2) > div:nth-child(3) {
+        background-color: #fee2e2 !important; /* red-100 */
+        border: 1px solid #fecaca !important;
+      }
+      /* 右下：其它 (浅橙色) */
+      #root > div > div:nth-child(2) > div:nth-child(4) {
+        background-color: #ffedd5 !important; /* orange-100 */
+        border: 1px solid #fed7aa !important;
+      }
+
+      /* 6. 统一方块内部样式：文字居中，占满格子 */
       #root > div > div:nth-child(2) > div {
         display: flex !important;
         flex-direction: column !important;
         justify-content: center !important;
         align-items: center !important;
         height: 100% !important;
-        margin: 0 !important;
-      }
-
-      /* 6. 底部的小字提示，紧贴底部 */
-      #root > div > div:last-child {
-        margin-top: auto !important;
-        padding-top: 8px !important;
+        border-radius: 16px !important; /* 圆角增加高级感 */
+        box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.05) !important;
       }
     </style>
   </head>
