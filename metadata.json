@@ -1,0 +1,5 @@
+{
+  "name": "Salary Calculator M3",
+  "description": "A Material 3 styled salary calculator for calculating estimated monthly net income based on hours, holidays, and allowances.",
+  "requestFramePermissions": []
+}
