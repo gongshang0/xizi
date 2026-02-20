@@ -4,24 +4,51 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     <title>月度工资计算器</title>
-    
-    
     <script src="https://cdn.tailwindcss.com"></script>
-    
     <style>
-      /* 强制全屏显示，不留白边 */
+      /* 1. 强制底座铺满 */
       html, body, #root {
-        height: 100vh; /* 100% 视口高度 */
-        width: 100vw;  /* 100% 视口宽度 */
+        height: 100vh;
+        width: 100vw;
         margin: 0;
         padding: 0;
-        background-color: #f8fafc; /* 背景色 */
-        overflow-y: auto; /* 允许垂直滚动 */
+        background-color: #f8fafc;
+        overflow: hidden; /* 禁止多余滚动 */
       }
 
-      /* 针对移动端键盘弹出时的布局优化 */
-      @media (max-height: 500px) {
-        #root { height: auto; }
+      /* 2. 强行拉伸内部方块的魔法 (CSS 覆盖) */
+      /* 这里的 .min-h-screen 是你 App.tsx 里最外层 div 默认带的 */
+      .min-h-screen {
+        height: 100vh !important;
+        display: flex !important;
+        flex-direction: column !important;
+        padding: 12px !important;
+      }
+
+      /* 让蓝色大卡片占 35% 高度 */
+      .min-h-screen > div:first-child {
+        flex: 0 0 35% !important;
+        display: flex !important;
+        flex-direction: column !important;
+        justify-content: center !important;
+        margin-bottom: 12px !important;
+      }
+
+      /* 让下方四个方块所在的区域吃掉剩下的 65% 高度 */
+      .min-h-screen > div:nth-child(2) {
+        flex: 1 !important;
+        display: grid !important;
+        grid-template-columns: repeat(2, 1fr) !important;
+        grid-template-rows: repeat(2, 1fr) !important;
+        gap: 12px !important;
+      }
+
+      /* 让方块里面的内容也垂直居中 */
+      .min-h-screen > div:nth-child(2) > div {
+        display: flex !important;
+        flex-direction: column !important;
+        justify-content: center !important;
+        height: 100% !important;
       }
     </style>
     <script type="module" crossorigin src="/assets/index-BOOjtX3S.js"></script>
