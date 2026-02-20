@@ -7,24 +7,15 @@
     <script type="module" crossorigin src="./assets/index-Q91DHHC7.js"></script>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-      /* 1. 流光动态背景 */
-      @keyframes gradientBG {
-        0% { background-position: 0% 50%; }
-        50% { background-position: 100% 50%; }
-        100% { background-position: 0% 50%; }
-      }
-
+      /* 1. 极致全屏与清爽背景 */
       html, body, #root {
         height: 100vh; height: 100svh;
         width: 100vw; margin: 0; padding: 0;
         overflow: hidden;
-        /* 深色流光背景，衬托彩色方框 */
-        background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
-        background-size: 400% 400%;
-        animation: gradientBG 15s ease infinite;
+        background-color: #f8fafc; /* 回归干净的底色 */
       }
 
-      /* 2. 容器：强制全屏拉伸 */
+      /* 2. 主容器 */
       #root > div {
         height: 100% !important;
         display: flex !important;
@@ -34,26 +25,26 @@
         box-sizing: border-box !important;
       }
 
-      /* 3. 顶部蓝色卡片：强化数字显示 */
+      /* 3. 顶部蓝色卡片：强化文字亮度 */
       #root > div > div:first-child {
         flex: 0 0 38% !important;
-        background: rgba(30, 64, 175, 0.85) !important; /* 半透明效果 */
-        backdrop-filter: blur(10px) !important; /* 毛玻璃 */
+        background: #1e40af !important; 
         border-radius: 32px !important;
-        border: 1px solid rgba(255, 255, 255, 0.2) !important;
+        display: flex !important;
+        flex-direction: column !important;
+        justify-content: center !important;
         color: white !important;
-        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2) !important;
+        box-shadow: 0 10px 15px -3px rgba(30, 64, 175, 0.2) !important;
       }
 
-      /* 强制大卡片内部字体极度清晰 */
+      /* 强制顶部大卡片字体加粗加亮 */
       #root > div > div:first-child span, 
       #root > div > div:first-child div {
         color: #ffffff !important;
-        text-shadow: 0 2px 4px rgba(0,0,0,0.3) !important;
-        font-weight: 900 !important; /* 最粗 */
+        font-weight: 800 !important; /* 加粗 */
       }
 
-      /* 4. 四个彩色方块：强制拉伸并美化字体 */
+      /* 4. 四个彩色方块：强制拉伸到底部 */
       #root > div > div:nth-child(2) {
         flex: 1 !important;
         display: grid !important;
@@ -69,46 +60,45 @@
         justify-content: center !important;
         align-items: center !important;
         border-radius: 24px !important;
-        background: rgba(255, 255, 255, 0.9) !important;
         border: 2px solid white !important;
-        box-shadow: 0 4px 15px rgba(0,0,0,0.1) !important;
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05) !important;
       }
 
-      /* 5. 字体清晰度专项优化 (解决“看不清”问题) */
-      /* 这里的选择器覆盖所有标签和数值 */
-      #root > div > div:nth-child(2) > div span,
-      #root > div > div:nth-child(2) > div div,
-      #root input {
-        font-weight: 800 !important; /* 极粗字体 */
+      /* 5. 核心优化：让方框内的字体“跳出来” */
+      #root > div > div:nth-child(2) > div span, /* 标题 */
+      #root > div > div:nth-child(2) > div div,  /* 数值容器 */
+      #root input {                             /* 输入框 */
+        font-weight: 900 !important; /* 极粗 */
         font-size: 1.1rem !important;
-        letter-spacing: 1px !important;
+        letter-spacing: 0.5px !important;
       }
 
-      /* 为不同颜色的方块匹配“深色”字体颜色，确保对比度 */
-      /* 总班次 (蓝框) -> 深蓝色字 */
-      #root > div > div:nth-child(2) > div:nth-child(1) { background: #e0f2fe !important; color: #0369a1 !important; }
-      /* 驻站次 (绿框) -> 深绿色字 */
-      #root > div > div:nth-child(2) > div:nth-child(2) { background: #dcfce7 !important; color: #15803d !important; }
-      /* 法定班 (红框) -> 深红色字 */
-      #root > div > div:nth-child(2) > div:nth-child(3) { background: #fee2e2 !important; color: #b91c1c !important; }
-      /* 其它 (橙框) -> 深咖啡色字 */
-      #root > div > div:nth-child(2) > div:nth-child(4) { background: #ffedd5 !important; color: #9a3412 !important; }
+      /* 为不同底色匹配“深一度”的文字颜色，确保极高对比度 */
+      /* 总班次 (浅蓝背景) -> 深蓝色字 */
+      #root > div > div:nth-child(2) > div:nth-child(1) { background-color: #e0f2fe !important; color: #075985 !important; }
+      /* 驻站次 (浅绿背景) -> 深绿色字 */
+      #root > div > div:nth-child(2) > div:nth-child(2) { background-color: #dcfce7 !important; color: #166534 !important; }
+      /* 法定班 (浅红背景) -> 深红色字 */
+      #root > div > div:nth-child(2) > div:nth-child(3) { background-color: #fee2e2 !important; color: #991b1b !important; }
+      /* 其它 (浅橙背景) -> 深咖啡色字 */
+      #root > div > div:nth-child(2) > div:nth-child(4) { background-color: #ffedd5 !important; color: #9a3412 !important; }
 
-      /* 强制输入框文字也是深色且加粗 */
+      /* 强制输入框文字也是深色加粗 */
       #root input {
         color: inherit !important;
-        background: transparent !important;
         text-align: center !important;
+        background: transparent !important;
         border: none !important;
+        width: 100% !important;
       }
 
-      /* 6. 底部文字：白色高亮 */
+      /* 6. 底部提示小字 */
       #root > div > div:last-child {
         margin-top: auto !important;
-        color: white !important;
+        text-align: center !important;
+        font-size: 11px !important;
+        color: #94a3b8 !important;
         font-weight: 600 !important;
-        text-shadow: 0 1px 2px rgba(0,0,0,0.5) !important;
-        opacity: 0.9;
       }
     </style>
   </head>
