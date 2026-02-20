@@ -1,16 +1,17 @@
-name: Build APK
+name: Deploy App
 on: push
 jobs:
-  build:
+  build-and-deploy:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
           node-version: 20
       - run: npm install && npm run build
-      - name: Upload Build
-        uses: actions/upload-artifact@v4
+      - name: Deploy to GitHub Pages
+        uses: JamesIves/github-pages-deploy-action@v4
         with:
-          name: app-release
-          path: dist/
+          folder: dist # 部署打包后的文件夹
