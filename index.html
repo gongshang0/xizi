@@ -4,22 +4,25 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     <title>月度工资计算器</title>
+    
     <script type="module" crossorigin src="./assets/index-Q91DHHC7.js"></script>
+    
     <script src="https://cdn.tailwindcss.com"></script>
     
     <style>
-      /* 强制所有基础容器占满屏幕高度 */
+      /* 强制全屏显示，不留白边 */
       html, body, #root {
-        height: 100%;
+        height: 100vh; /* 100% 视口高度 */
+        width: 100vw;  /* 100% 视口宽度 */
         margin: 0;
         padding: 0;
-        background-color: #f0f4f8; /* 与 App 背景色一致，防止拉伸时白边 */
+        background-color: #f8fafc; /* 背景色 */
+        overflow-y: auto; /* 允许垂直滚动 */
       }
 
-      /* 针对移动端优化，防止滚动回弹导致的布局跳动 */
-      #root {
-        display: flex;
-        flex-direction: column;
+      /* 针对移动端键盘弹出时的布局优化 */
+      @media (max-height: 500px) {
+        #root { height: auto; }
       }
     </style>
   </head>
