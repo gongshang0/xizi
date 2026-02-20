@@ -7,18 +7,24 @@
     <script type="module" crossorigin src="./assets/index-Q91DHHC7.js"></script>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-      /* 1. 极致全屏锁定：使用 svh (Small Viewport Height) 彻底解决底部白边 */
-      html, body, #root {
-        height: 100vh;
-        height: 100svh; /* 关键：自动避开手机浏览器工具栏 */
-        width: 100vw;
-        margin: 0;
-        padding: 0;
-        overflow: hidden;
-        background: #f1f5f9;
+      /* 1. 流光动态背景 */
+      @keyframes gradientBG {
+        0% { background-position: 0% 50%; }
+        50% { background-position: 100% 50%; }
+        100% { background-position: 0% 50%; }
       }
 
-      /* 2. 容器：强制占满，不留一丝缝隙 */
+      html, body, #root {
+        height: 100vh; height: 100svh;
+        width: 100vw; margin: 0; padding: 0;
+        overflow: hidden;
+        /* 深色流光背景，衬托彩色方框 */
+        background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+        background-size: 400% 400%;
+        animation: gradientBG 15s ease infinite;
+      }
+
+      /* 2. 容器：强制全屏拉伸 */
       #root > div {
         height: 100% !important;
         display: flex !important;
@@ -28,59 +34,81 @@
         box-sizing: border-box !important;
       }
 
-      /* 3. 顶部卡片：引入微光效果 */
+      /* 3. 顶部蓝色卡片：强化数字显示 */
       #root > div > div:first-child {
         flex: 0 0 38% !important;
-        background: linear-gradient(135deg, #1d4ed8 0%, #3b82f6 100%) !important;
+        background: rgba(30, 64, 175, 0.85) !important; /* 半透明效果 */
+        backdrop-filter: blur(10px) !important; /* 毛玻璃 */
         border-radius: 32px !important;
-        box-shadow: 0 12px 30px -10px rgba(37, 99, 235, 0.4) !important;
-        display: flex !important;
-        flex-direction: column !important;
-        justify-content: center !important;
-        position: relative;
-        overflow: hidden;
+        border: 1px solid rgba(255, 255, 255, 0.2) !important;
+        color: white !important;
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2) !important;
       }
 
-      /* 4. 四个格子：强制平分剩余空间 */
+      /* 强制大卡片内部字体极度清晰 */
+      #root > div > div:first-child span, 
+      #root > div > div:first-child div {
+        color: #ffffff !important;
+        text-shadow: 0 2px 4px rgba(0,0,0,0.3) !important;
+        font-weight: 900 !important; /* 最粗 */
+      }
+
+      /* 4. 四个彩色方块：强制拉伸并美化字体 */
       #root > div > div:nth-child(2) {
-        flex: 1 !important; /* 吃掉底部所有空间 */
+        flex: 1 !important;
         display: grid !important;
         grid-template-columns: repeat(2, 1fr) !important;
         grid-template-rows: repeat(2, 1fr) !important;
         gap: 14px !important;
       }
 
-      /* 5. 小方块：微浮雕质感 */
       #root > div > div:nth-child(2) > div {
         height: 100% !important;
         display: flex !important;
         flex-direction: column !important;
         justify-content: center !important;
         align-items: center !important;
-        border-radius: 28px !important;
-        background: white !important;
-        border: 2px solid rgba(255, 255, 255, 1) !important;
-        box-shadow: 0 8px 16px -4px rgba(0, 0, 0, 0.05) !important;
-        transition: all 0.3s ease;
+        border-radius: 24px !important;
+        background: rgba(255, 255, 255, 0.9) !important;
+        border: 2px solid white !important;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.1) !important;
       }
 
-      /* 色彩微调：柔和渐变底色 */
-      #root > div > div:nth-child(2) > div:nth-child(1) { background: linear-gradient(145deg, #eff6ff, #dbeafe) !important; border-color: #bfdbfe !important; }
-      #root > div > div:nth-child(2) > div:nth-child(2) { background: linear-gradient(145deg, #f0fdf4, #dcfce7) !important; border-color: #bbf7d0 !important; }
-      #root > div > div:nth-child(2) > div:nth-child(3) { background: linear-gradient(145deg, #fff1f2, #ffe4e6) !important; border-color: #fecaca !important; }
-      #root > div > div:nth-child(2) > div:nth-child(4) { background: linear-gradient(145deg, #fff7ed, #ffedd5) !important; border-color: #fed7aa !important; }
+      /* 5. 字体清晰度专项优化 (解决“看不清”问题) */
+      /* 这里的选择器覆盖所有标签和数值 */
+      #root > div > div:nth-child(2) > div span,
+      #root > div > div:nth-child(2) > div div,
+      #root input {
+        font-weight: 800 !important; /* 极粗字体 */
+        font-size: 1.1rem !important;
+        letter-spacing: 1px !important;
+      }
 
-      /* 字体与标签美化 */
-      #root span { font-weight: 700 !important; letter-spacing: 0.5px !important; }
-      
-      /* 6. 底部提示：完美贴边 */
+      /* 为不同颜色的方块匹配“深色”字体颜色，确保对比度 */
+      /* 总班次 (蓝框) -> 深蓝色字 */
+      #root > div > div:nth-child(2) > div:nth-child(1) { background: #e0f2fe !important; color: #0369a1 !important; }
+      /* 驻站次 (绿框) -> 深绿色字 */
+      #root > div > div:nth-child(2) > div:nth-child(2) { background: #dcfce7 !important; color: #15803d !important; }
+      /* 法定班 (红框) -> 深红色字 */
+      #root > div > div:nth-child(2) > div:nth-child(3) { background: #fee2e2 !important; color: #b91c1c !important; }
+      /* 其它 (橙框) -> 深咖啡色字 */
+      #root > div > div:nth-child(2) > div:nth-child(4) { background: #ffedd5 !important; color: #9a3412 !important; }
+
+      /* 强制输入框文字也是深色且加粗 */
+      #root input {
+        color: inherit !important;
+        background: transparent !important;
+        text-align: center !important;
+        border: none !important;
+      }
+
+      /* 6. 底部文字：白色高亮 */
       #root > div > div:last-child {
         margin-top: auto !important;
-        padding-bottom: env(safe-area-inset-bottom) !important;
-        text-align: center !important;
-        font-size: 11px !important;
-        color: #94a3b8 !important;
-        text-transform: uppercase;
+        color: white !important;
+        font-weight: 600 !important;
+        text-shadow: 0 1px 2px rgba(0,0,0,0.5) !important;
+        opacity: 0.9;
       }
     </style>
   </head>
