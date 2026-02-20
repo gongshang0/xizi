@@ -7,68 +7,69 @@
     <script type="module" crossorigin src="./assets/index-Q91DHHC7.js"></script>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-      /* 1. 强制所有层级都是 100% 高度，不准有缝隙 */
+      /* 1. 强制铺满全屏，不准有缝隙 */
       html, body, #root {
         height: 100vh !important;
-        height: -webkit-fill-available; /* 修复移动端浏览器高度计算 */
-        width: 100vw;
-        margin: 0;
-        padding: 0;
-        overflow: hidden; /* 彻底禁止滚动，防止上下晃动 */
+        width: 100vw !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        overflow: hidden !important;
         background-color: #f8fafc;
       }
 
-      /* 2. 强制 React 容器变成弹性盒子，纵向排布 */
+      /* 2. 强制内部主容器撑满 */
       #root > div {
         height: 100% !important;
         display: flex !important;
         flex-direction: column !important;
         padding: 16px !important;
+        gap: 12px !important;
         box-sizing: border-box !important;
       }
 
-      /* 3. 顶部蓝色大卡片：固定占屏幕 35% 高度 */
+      /* 3. 找回蓝色大卡片并强制拉伸 (占屏幕 40%) */
       #root > div > div:first-child {
-        flex: 0 0 35% !important;
+        flex: 0 0 40% !important;
+        background-color: #1e40af !important; /* 强制蓝色回归 */
+        border-radius: 24px !important;
         display: flex !important;
         flex-direction: column !important;
         justify-content: center !important;
-        margin-bottom: 16px !important;
+        color: white !important;
       }
 
-      /* 4. 四个彩色方块区域：占据屏幕剩下 100% 的空间 */
+      /* 4. 四个彩色小框所在区域 (占屏幕 60%) */
       #root > div > div:nth-child(2) {
-        flex: 1 !important; /* 核心：吃掉所有剩余空间 */
+        flex: 1 !important; 
         display: grid !important;
         grid-template-columns: repeat(2, 1fr) !important;
         grid-template-rows: repeat(2, 1fr) !important;
         gap: 12px !important;
-        height: 100% !important;
       }
 
-      /* 5. 强制四个方块撑满格子，并内部垂直居中 */
+      /* 5. 强制给小方块上色并垂直拉伸到底部 */
       #root > div > div:nth-child(2) > div {
+        height: 100% !important;
         display: flex !important;
         flex-direction: column !important;
         justify-content: center !important;
         align-items: center !important;
-        height: 100% !important; /* 强制拉伸方块高度 */
         border-radius: 16px !important;
-        box-shadow: 0 2px 4px rgba(0,0,0,0.05) !important;
+        padding: 8px !important;
       }
 
-      /* 保持你喜欢的彩色配置 */
+      /* 颜色精确覆盖 */
       #root > div > div:nth-child(2) > div:nth-child(1) { background-color: #e0f2fe !important; }
       #root > div > div:nth-child(2) > div:nth-child(2) { background-color: #dcfce7 !important; }
       #root > div > div:nth-child(2) > div:nth-child(3) { background-color: #fee2e2 !important; }
       #root > div > div:nth-child(2) > div:nth-child(4) { background-color: #ffedd5 !important; }
 
-      /* 6. 底部提示字：紧贴底边 */
+      /* 6. 底部文字处理 */
       #root > div > div:last-child {
         margin-top: auto !important;
-        padding-top: 8px !important;
+        text-align: center !important;
         font-size: 11px !important;
-        opacity: 0.6;
+        color: #64748b !important;
       }
     </style>
   </head>
