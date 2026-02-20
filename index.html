@@ -2,67 +2,73 @@
 <html lang="zh-CN">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
     <title>月度工资计算器</title>
     <script type="module" crossorigin src="./assets/index-Q91DHHC7.js"></script>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-      /* 1. 基础容器：强制占满 100% 高度且禁止多余滚动 */
+      /* 1. 强制所有层级都是 100% 高度，不准有缝隙 */
       html, body, #root {
-        height: 100vh; width: 100vw; margin: 0; padding: 0;
-        overflow: hidden; background-color: #f8fafc;
+        height: 100vh !important;
+        height: -webkit-fill-available; /* 修复移动端浏览器高度计算 */
+        width: 100vw;
+        margin: 0;
+        padding: 0;
+        overflow: hidden; /* 彻底禁止滚动，防止上下晃动 */
+        background-color: #f8fafc;
       }
 
-      /* 2. 核心布局：垂直方向伸缩 */
+      /* 2. 强制 React 容器变成弹性盒子，纵向排布 */
       #root > div {
-        height: 100vh !important;
+        height: 100% !important;
         display: flex !important;
         flex-direction: column !important;
-        padding: 12px !important;
+        padding: 16px !important;
         box-sizing: border-box !important;
       }
 
-      /* 3. 顶部蓝色汇总卡片：占据屏幕的约 35% */
+      /* 3. 顶部蓝色大卡片：固定占屏幕 35% 高度 */
       #root > div > div:first-child {
         flex: 0 0 35% !important;
         display: flex !important;
         flex-direction: column !important;
         justify-content: center !important;
-        margin-bottom: 12px !important;
+        margin-bottom: 16px !important;
       }
 
-      /* 4. 关键：下方四个彩色方块所在的区域，吃掉剩余所有空间 */
+      /* 4. 四个彩色方块区域：占据屏幕剩下 100% 的空间 */
       #root > div > div:nth-child(2) {
-        flex: 1 !important; /* 强制占据剩下所有高度 */
+        flex: 1 !important; /* 核心：吃掉所有剩余空间 */
         display: grid !important;
         grid-template-columns: repeat(2, 1fr) !important;
         grid-template-rows: repeat(2, 1fr) !important;
         gap: 12px !important;
-        margin-bottom: 8px !important;
+        height: 100% !important;
       }
 
-      /* 5. 颜色与垂直撑开：让每个方块内部内容居中且撑满格子 */
+      /* 5. 强制四个方块撑满格子，并内部垂直居中 */
       #root > div > div:nth-child(2) > div {
         display: flex !important;
         flex-direction: column !important;
         justify-content: center !important;
         align-items: center !important;
-        height: 100% !important; /* 关键：强制拉伸方块高度 */
+        height: 100% !important; /* 强制拉伸方块高度 */
         border-radius: 16px !important;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.05) !important;
       }
 
-      /* 方块颜色配置 */
-      #root > div > div:nth-child(2) > div:nth-child(1) { background-color: #e0f2fe !important; } /* 蓝 */
-      #root > div > div:nth-child(2) > div:nth-child(2) { background-color: #dcfce7 !important; } /* 绿 */
-      #root > div > div:nth-child(2) > div:nth-child(3) { background-color: #fee2e2 !important; } /* 红 */
-      #root > div > div:nth-child(2) > div:nth-child(4) { background-color: #ffedd5 !important; } /* 橙 */
+      /* 保持你喜欢的彩色配置 */
+      #root > div > div:nth-child(2) > div:nth-child(1) { background-color: #e0f2fe !important; }
+      #root > div > div:nth-child(2) > div:nth-child(2) { background-color: #dcfce7 !important; }
+      #root > div > div:nth-child(2) > div:nth-child(3) { background-color: #fee2e2 !important; }
+      #root > div > div:nth-child(2) > div:nth-child(4) { background-color: #ffedd5 !important; }
 
-      /* 6. 底部提示文字：始终贴在屏幕最底端 */
+      /* 6. 底部提示字：紧贴底边 */
       #root > div > div:last-child {
-        text-align: center !important;
-        font-size: 12px !important;
-        color: #94a3b8 !important;
         margin-top: auto !important;
+        padding-top: 8px !important;
+        font-size: 11px !important;
+        opacity: 0.6;
       }
     </style>
   </head>
