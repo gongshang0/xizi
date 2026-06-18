@@ -23,17 +23,17 @@ const App: React.FC = () => {
       {/* Top Floating Card */}
       {/* Dart: margin: fromLTRB(12, 60, 12, 20) -> mx-[12px] mt-[60px] mb-[20px] */}
       {/* Dart: padding: vertical 30 -> py-[30px] */}
-      {/* Dart: color: Color(0xFF0D41A8), borderRadius: 24 */}
+      {/* Dart: color: Color(0xFF2143B3), borderRadius: 24 */}
       {/* Dart: boxShadow: [BoxShadow(color: Colors.black12, blurRadius: 10)] */}
-      <div className="mx-[12px] mt-[60px] mb-[20px] py-[30px] bg-[#0D41A8] rounded-[24px] shadow-[0_0_10px_rgba(0,0,0,0.12)]">
+      <div className="mx-[12px] mt-[60px] mb-[22px] py-[32px] bg-[#2143B3] rounded-[24px] shadow-[0_2px_12px_rgba(33,67,179,0.15)]">
         <div className="flex flex-col items-center text-center px-5">
           {/* Dart: Text("本月预计实发 (到手)", style: TextStyle(color: Colors.white70, fontSize: 13)) */}
-          <div className="text-white/70 text-[13px] font-normal mb-[8px]">
+          <div className="text-white/80 text-[13px] font-normal mb-[10px]">
             本月预计实发 (到手)
           </div>
           
           {/* Dart: Text("¥ ...", style: TextStyle(color: Colors.white, fontSize: 38, fontWeight: FontWeight.bold)) */}
-          <div className="text-white text-[38px] font-bold mb-[20px] leading-none">
+          <div className="text-white text-[40px] font-bold mb-[24px] leading-none tracking-tight">
             <span className="text-2xl font-normal mr-1 relative -top-2">¥</span>
             {results.netPay.toLocaleString('zh-CN', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
           </div>
@@ -45,7 +45,7 @@ const App: React.FC = () => {
             {/* Dart: _topStat("总应发", gross) */}
             <div className="flex flex-col items-center">
                {/* Dart: fontSize: 11, color: Colors.white60 */}
-               <span className="text-white/60 text-[11px] mb-0.5">总应发</span>
+               <span className="text-white/60 text-[11px] mb-1">总应发</span>
                {/* Dart: fontSize: 15, fontWeight: FontWeight.w600 */}
                <span className="text-white text-[15px] font-semibold">
                  ¥ {results.grossPay.toLocaleString('zh-CN', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
@@ -55,7 +55,7 @@ const App: React.FC = () => {
             {/* Item 2 */}
             {/* Dart: _topStat("各项扣除", -deduct) */}
             <div className="flex flex-col items-center">
-               <span className="text-white/60 text-[11px] mb-0.5">各项扣除</span>
+               <span className="text-white/60 text-[11px] mb-1">各项扣除</span>
                <span className="text-white text-[15px] font-semibold">
                  -¥ {results.totalDeductions.toLocaleString('zh-CN', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
                </span>
@@ -64,39 +64,50 @@ const App: React.FC = () => {
         </div>
       </div>
 
-      {/* Input Row */}
-      {/* Dart: Padding(padding: EdgeInsets.symmetric(horizontal: 10), child: Row(children: [ ... SizedBox(width: 6) ... ])) */}
-      <div className="px-[10px] flex gap-[6px]">
-        {/* 1. Dart: _buildSquareInput("总班次", _shifts, Color(0xFF0D41A8)) */}
+      {/* Input Grid in 2x2 layout matching Image 2 */}
+      <div className="px-[12px] grid grid-cols-2 gap-[12px]">
+        {/* 1. 总班次 */}
         <CompactInput
           label="总班次"
           value={state.totalShifts === 0 ? '' : state.totalShifts}
           onChange={handleNumberChange('totalShifts')}
-          textColor="text-[#0D41A8]" // Deep Blue
+          textColor="text-[#1B43C3]"
+          bgColor="bg-[#E8F1FC]"
+          borderColor="border-[#D0E3F8]"
+          labelColor="text-[#7088A5]"
         />
         
-        {/* 2. Dart: _buildSquareInput("驻站次", _station, Colors.green.shade700) */}
+        {/* 2. 驻站次 */}
         <CompactInput
           label="驻站次"
           value={state.stationCount === 0 ? '' : state.stationCount}
           onChange={handleNumberChange('stationCount')}
-          textColor="text-green-700" // Green shade 700
+          textColor="text-[#1E7E34]"
+          bgColor="bg-[#E9F7F0]"
+          borderColor="border-[#CFEEDC]"
+          labelColor="text-[#6EA587]"
         />
         
-        {/* 3. Dart: _buildSquareInput("法定班", _legal, Colors.redAccent) */}
+        {/* 3. 法定班 */}
         <CompactInput
           label="法定班"
           value={state.holidayShifts === 0 ? '' : state.holidayShifts}
           onChange={handleNumberChange('holidayShifts')}
-          textColor="text-red-500" // RedAccent approx
+          textColor="text-[#D62E4A]"
+          bgColor="bg-[#FDECEF]"
+          borderColor="border-[#FBCED5]"
+          labelColor="text-[#B27C86]"
         />
 
-        {/* 4. Dart: _buildSquareInput("其它", _other, Colors.orange.shade800) */}
+        {/* 4. 其它 */}
         <CompactInput
           label="其它"
           value={state.otherEarnings === 0 ? '' : state.otherEarnings}
           onChange={handleNumberChange('otherEarnings')}
-          textColor="text-orange-800" // Orange shade 800
+          textColor="text-[#C9791F]"
+          bgColor="bg-[#FDF4E7]"
+          borderColor="border-[#F9E2C6]"
+          labelColor="text-[#B59779]"
         />
       </div>
 

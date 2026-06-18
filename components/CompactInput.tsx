@@ -5,20 +5,26 @@ interface CompactInputProps {
   value: number | string;
   onChange: (val: string) => void;
   textColor?: string;
+  bgColor?: string;
+  borderColor?: string;
+  labelColor?: string;
 }
 
 export const CompactInput: React.FC<CompactInputProps> = ({ 
   label, 
   value, 
   onChange,
-  textColor = 'text-[#0D41A8]' // Default to Deep Blue
+  textColor = 'text-[#0D41A8]', // Default to Deep Blue
+  bgColor = 'bg-white',
+  borderColor = 'border-transparent',
+  labelColor = 'text-black/45'
 }) => {
   return (
     // Dart: decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(16), boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.02), blurRadius: 8)])
     // Dart: padding: vertical 12
-    <div className="flex-1 bg-white rounded-[16px] py-[12px] shadow-[0_0_8px_rgba(0,0,0,0.02)] flex flex-col items-center">
+    <div className={`flex-1 ${bgColor} border ${borderColor} rounded-[16px] py-[14px] shadow-[0_2px_8px_rgba(0,0,0,0.01)] flex flex-col items-center transition-all duration-200`}>
       {/* Dart: Text(label, style: TextStyle(fontSize: 11, color: Colors.black45, fontWeight: FontWeight.bold)) */}
-      <span className="text-[11px] text-black/45 font-bold mb-[4px] whitespace-nowrap">
+      <span className={`text-[12px] ${labelColor} font-bold mb-[6px] whitespace-nowrap`}>
         {label}
       </span>
       
@@ -29,7 +35,7 @@ export const CompactInput: React.FC<CompactInputProps> = ({
         onChange={(e) => onChange(e.target.value)}
         onFocus={(e) => e.target.select()}
         placeholder="0"
-        className={`w-full text-center text-[18px] font-bold ${textColor} bg-transparent outline-none border-none p-0 placeholder-gray-300`}
+        className={`w-full text-center text-[19px] font-bold ${textColor} bg-transparent outline-none border-none p-0 placeholder-current/30`}
       />
     </div>
   );
