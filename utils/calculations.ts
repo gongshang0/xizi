@@ -56,8 +56,8 @@ export const calculateSalary = (state: SalaryState) => {
   const taxableIncome = grossPay - deductionSocial - TAX_THRESHOLD;
   const deductionTax = taxableIncome > 0 ? taxableIncome * 0.03 : 0;
 
-  // Food Deduction: <= 10 shifts = 0; > 10 shifts = 550
-  const DEDUCTION_FOOD = state.totalShifts <= 10 ? 0 : 550;
+  // Food Deduction: <= 10 shifts = 0; > 10 shifts = 550 (only if state.deductFood is true)
+  const DEDUCTION_FOOD = !state.deductFood ? 0 : (state.totalShifts <= 10 ? 0 : 550);
 
   // Total Deductions
   const totalDeductions = deductionSocial + deductionTax + DEDUCTION_FOOD;
